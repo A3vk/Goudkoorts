@@ -10,14 +10,18 @@ namespace Goudkoorts.Controller
 {
     public class Controller
     {
-        public InputView InputView { get; private set; }
-        public OutputView OutputView { get; private set; }
-        public Game Game { get; private set; }
+        private InputView _inputView;
+        private OutputView _outputView;
+        private Game _game;
 
         public Controller()
         {
-            InputView = new InputView();
-            OutputView = new OutputView();
+            _inputView = new InputView();
+            _outputView = new OutputView();
+
+            _game = new Game();
+
+            _game.InitMap();
         }
     }
 }

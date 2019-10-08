@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Goudkoorts.Model
 {
-    public class MarshallingTrack : Track
+    public class SwitchMerge : SwitchTrack
     {
+        public SwitchMerge()
+        {
+            TrackBend = TrackBend.RightUp;
+        }
+
         public override void SetDescription()
         {
             throw new NotImplementedException();

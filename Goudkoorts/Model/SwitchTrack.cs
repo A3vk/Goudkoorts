@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Goudkoorts.Model
 {
-    public class SwitchTrack : Track
+    public abstract class SwitchTrack : Track
     {
+        public bool Switched { get; set; }
+
+        public SwitchTrack()
+        {
+            Switched = false;
+        }
+
+        public abstract override void SetDescription();
     }
 }

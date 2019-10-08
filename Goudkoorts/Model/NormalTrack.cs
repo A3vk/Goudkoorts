@@ -8,5 +8,9 @@ namespace Goudkoorts.Model
 {
     public class NormalTrack : Track
     {
+        public override void SetDescription()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

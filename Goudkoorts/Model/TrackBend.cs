@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Goudkoorts.Model
 {
-    public class MarshallingTrack : Track
+    public enum TrackBend
     {
-        public override void SetDescription()
-        {
-            throw new NotImplementedException();
-        }
+        Horizontal, Vertical, LeftUp, LeftDown, RightUp, RightDown
     }
 }

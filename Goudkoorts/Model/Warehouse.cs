@@ -9,5 +9,7 @@ namespace Goudkoorts.Model
     public class Warehouse
     {
         public NormalTrack StartTrack { get; set; }
+
+        public string Description { get; set; }
     }
 }

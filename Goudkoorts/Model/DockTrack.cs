@@ -9,5 +9,10 @@ namespace Goudkoorts.Model
     public class DockTrack : Track
     {
         public Ship Ship { get; set; }
+
+        public override void SetDescription()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

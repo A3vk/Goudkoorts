@@ -51,8 +51,11 @@
     <Compile Include="Model\Minecart.cs" />
     <Compile Include="Model\NormalTrack.cs" />
     <Compile Include="Model\Ship.cs" />
+    <Compile Include="Model\SwitchMerge.cs" />
+    <Compile Include="Model\SwitchSplit.cs" />
     <Compile Include="Model\SwitchTrack.cs" />
     <Compile Include="Model\Track.cs" />
+    <Compile Include="Model\TrackBend.cs" />
     <Compile Include="Model\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\InputView.cs" />
