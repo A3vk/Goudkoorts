@@ -8,18 +8,18 @@ namespace Goudkoorts.View
 {
     public class OutputView
     {
-        public void DisplayMaze(String maze)
+        public void DisplayMaze(String track)
         {
             Console.Clear();
-            Console.WriteLine("┌───────────┐\n" +
-                              "│  Sokoban  │\n" +
-                              "└───────────┘\n" +
-                              "─────────────────────────────────────────────────────────────────");
+            Console.WriteLine("┌─────────────┐\n" +
+                              "│  Goudkoorts │\n" +
+                              "└─────────────┘\n" +
+                              "─────────────────────────────────────────────────────────────────────────────────────────");
 
-            Console.WriteLine(maze);
+            Console.WriteLine(track);
 
-            Console.WriteLine("─────────────────────────────────────────────────────────────────\n" +
-                              "> Gebruik de pijltjestoetsen ( s = stop, r = reset )");
+            Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────\n" +
+                              "> Gebruik de q,w,e,r,t toetsen voor het veranderen van de wissel ( s = stop, r = reset )");
         }
 
         public void DisplayMenu()
@@ -27,25 +27,24 @@ namespace Goudkoorts.View
 
             Console.WriteLine("┌─────────────────────────────────────────────────────┐\n" +
                               "│                                                     │\n" +
-                              "│ Welkom bij Sokoban                                  │\n" +
+                              "│ Welkom bij Goudkoorts                               │\n" +
                               "│                                                     │\n" +
                               "│ Betekenis van de symbolen    │   Doel van het spel  │\n" +
                               "│                              │                      │\n" +
-                              "│ Spatie : Outerspace          │   Duw met de truck   │\n" +
-                              "│      █ : Muur                │   de krat(ten)       │\n" +
-                              "│      . : Vloer               │   naar de bestemming │\n" +
-                              "│      O : Krat                │                      │\n" +
-                              "│      0 : Krat op bestemming  │                      │\n" +
-                              "│      X : Bestemming          │                      │\n" +
-                              "│      @ : Truck               │                      │\n" +
-                              "│      $ : Medewerker          │                      │\n" +
-                              "│      Z : Slapende medewerker │                      │\n" +
-                              "│      ~ : Valkuil             │                      │\n" +
-                              "│        : Gat                 │                      │\n" +
-                              "└─────────────────────────────────────────────────────┘\n" +
-                              "\n" +
-                              "\n" +
-                              "> Kies een doolhof ( 1 - 6 ), s = Stop");
+                              "│      ═ : Spoor               │   begeleidt de       │\n" +
+                              "│╚/╔/|╗/╝: Wissel              │   mijnkarren naar    │\n" +
+                              "│      0 : Vol karretje        │   de Kade            │\n" +
+                              "│      O : Leeg karretje       │                      │\n" +
+                              "│      ⌂ : Warehouse           │                      │\n" +
+                              "│      k : Kade                │                      │\n" +
+                              "│      ÷ : Rangeerterein       │                      │\n" +
+                              "│                              │                      │\n" +
+                              "│                              │                      │\n" +
+                              "│                              │                      │\n" +
+                              "│                              │                      │\n" +
+                              "│                              │                      │\n" +
+                              "│                              │                      │\n" +
+                              "└─────────────────────────────────────────────────────┘\n");
         }
 
         public void DisplayVictory()
