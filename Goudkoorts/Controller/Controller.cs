@@ -57,45 +57,46 @@ namespace Goudkoorts.Controller
             int x = warehouseX + 1;
             Map[warehouseY, warehouseX] = warehouse.Description;
 
-            Track temp = warehouse.StartTrack;
+            Track currentTrack = warehouse.StartTrack;
 
             bool reverse = false;
             bool trackSet = false;
+            bool keepCurrentX = false;
 
-            while (temp != null)
+            while (currentTrack != null)
             {
-                switch (temp.TrackBend)
+                switch (currentTrack.TrackBend)
                 {
                     case TrackBend.Horizontal:
                         Map[y, x] = '═';
                         break;
                     case TrackBend.Vertical:
                         Map[y, x] = '║';
-                        x--;
+                        keepCurrentX = true;
                         y--;
                         break;
                     case TrackBend.LeftUp:
                         Map[y, x] = '╝';
 
-                        if (temp.NextTrack.TrackBend == TrackBend.Horizontal)
+                        if (currentTrack.NextTrack.TrackBend == TrackBend.Horizontal)
                         {
                             reverse = true;
                             y++;
                         }
                         else
-                            x--;
+                            keepCurrentX = true;
 
                         y--;
                         break;
                     case TrackBend.LeftDown:
                         Map[y, x] = '╗';
-                        if (temp.NextTrack.TrackBend == TrackBend.Horizontal)
+                        if (currentTrack.NextTrack.TrackBend == TrackBend.Horizontal)
                         {
                             reverse = true;
                         }
                         else
                         {
-                            x--;
+                            keepCurrentX = true;
                             y++;
                         }
                         break;
@@ -109,32 +110,35 @@ namespace Goudkoorts.Controller
                     case TrackBend.SwitchUp:
                         if (Map[y, x] != default(char))
                         {
-                            temp = ((SwitchSplit)temp).TrackDown;
+                            currentTrack = ((SwitchSplit)currentTrack).TrackDown;
                             trackSet = true;
-                            x--;
+                            keepCurrentX = true;
                             y++;
                         }
                         else
                         {
                             Map[y, x] = '╝';
-                            if (temp.NextTrack.TrackBend == TrackBend.Horizontal)
+                            if (currentTrack.NextTrack.TrackBend == TrackBend.Horizontal)
                                 reverse = true;
                             else
-                                x--;
+                                keepCurrentX = true;
 
                             y--;
                         }
                         break;
                 }
+                if (!keepCurrentX)
+                {
+                    if (reverse)
+                        x--;
+                    else
+                        x++;
 
-                if (reverse)
-                    x--;
-                else
-                    x++;
-
+                }
                 if (!trackSet)
-                    temp = temp.NextTrack;
+                    currentTrack = currentTrack.NextTrack;
 
+                keepCurrentX = false;
                 trackSet = false;
             }
         }
