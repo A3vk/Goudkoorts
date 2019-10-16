@@ -22,9 +22,9 @@ namespace Goudkoorts.Model
         #region Initialize the Map
         public void InitMap()
         {
-            Warehouses[0] = new Warehouse();
-            Warehouses[1] = new Warehouse();
-            Warehouses[2] = new Warehouse();
+            Warehouses[0] = new Warehouse() { Description = 'A' };
+            Warehouses[1] = new Warehouse() { Description = 'B' };
+            Warehouses[2] = new Warehouse() { Description = 'C' };
 
             SwitchTracks[0] = new SwitchMerge();
             SwitchTracks[1] = new SwitchSplit();

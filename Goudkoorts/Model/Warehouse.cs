@@ -10,6 +10,6 @@ namespace Goudkoorts.Model
     {
         public NormalTrack StartTrack { get; set; }
 
-        public string Description { get; set; }
+        public char Description { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Goudkoorts.Model
 
         public SwitchSplit()
         {
-            TrackBend = TrackBend.LeftUp;
+            TrackBend = TrackBend.SwitchUp;
         }
 
         public override void SetDescription()

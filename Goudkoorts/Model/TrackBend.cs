@@ -8,6 +8,6 @@ namespace Goudkoorts.Model
 {
     public enum TrackBend
     {
-        Horizontal, Vertical, LeftUp, LeftDown, RightUp, RightDown
+        Horizontal, Vertical, LeftUp, LeftDown, RightUp, RightDown, SwitchUp, SwitchDown
     }
 }
