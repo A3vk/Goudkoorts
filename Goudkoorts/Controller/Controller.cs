@@ -36,7 +36,7 @@ namespace Goudkoorts.Controller
             }
 
 
-            String[] lines = new String[9];
+            string[] lines = new string[9];
 
             for (int y = 0; y < 9; y++)
             {
@@ -59,8 +59,8 @@ namespace Goudkoorts.Controller
 
             Track temp = warehouse.StartTrack;
 
-            Boolean reverse = false;
-            Boolean trackSet = false;
+            bool reverse = false;
+            bool trackSet = false;
 
             while (temp != null)
             {
@@ -76,6 +76,7 @@ namespace Goudkoorts.Controller
                         break;
                     case TrackBend.LeftUp:
                         Map[y, x] = '╝';
+
                         if (temp.NextTrack.TrackBend == TrackBend.Horizontal)
                         {
                             reverse = true;
@@ -83,6 +84,7 @@ namespace Goudkoorts.Controller
                         }
                         else
                             x--;
+
                         y--;
                         break;
                     case TrackBend.LeftDown:
@@ -119,18 +121,20 @@ namespace Goudkoorts.Controller
                                 reverse = true;
                             else
                                 x--;
+
                             y--;
                         }
                         break;
-                    default:
-                        break;
                 }
+
                 if (reverse)
                     x--;
                 else
                     x++;
+
                 if (!trackSet)
                     temp = temp.NextTrack;
+
                 trackSet = false;
             }
         }
