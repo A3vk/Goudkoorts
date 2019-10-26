@@ -12,7 +12,7 @@ namespace Goudkoorts.Model
 
         public override void SetDescription()
         {
-            throw new NotImplementedException();
+            Description = 'k';
         }
     }
 }

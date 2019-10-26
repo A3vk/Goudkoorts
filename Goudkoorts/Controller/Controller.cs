@@ -51,6 +51,8 @@ namespace Goudkoorts.Controller
                 Console.WriteLine(item);
             }
         }
+
+        //Refactor
         private void DrawWarehouseMap(Warehouse warehouse, int warehouseX, int warehouseY)
         {
             int y = warehouseY;
@@ -127,6 +129,7 @@ namespace Goudkoorts.Controller
                         }
                         break;
                 }
+
                 if (!keepCurrentX)
                 {
                     if (reverse)
@@ -135,6 +138,7 @@ namespace Goudkoorts.Controller
                         x++;
 
                 }
+
                 if (!trackSet)
                     currentTrack = currentTrack.NextTrack;
 

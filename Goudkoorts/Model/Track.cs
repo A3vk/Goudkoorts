@@ -16,7 +16,7 @@ namespace Goudkoorts.Model
         public TrackBend TrackBend
         {
             get { return _trackBend; }
-            set { _trackBend = value; /*SetDescription();*/ }
+            set { _trackBend = value; SetDescription(); }
         }
 
         public Track()

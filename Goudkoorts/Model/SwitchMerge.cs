@@ -15,7 +15,15 @@ namespace Goudkoorts.Model
 
         public override void SetDescription()
         {
-            throw new NotImplementedException();
+            switch(TrackBend)
+            {
+                case TrackBend.RightUp:
+                    Description = '╚';
+                    break;
+                case TrackBend.RightDown:
+                    Description = '╔';
+                    break;
+            }
         }
     }
 }
