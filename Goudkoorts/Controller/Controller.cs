@@ -24,12 +24,12 @@ namespace Goudkoorts.Controller
             _game = new Game();
 
             _game.InitMap();
-
-            _map = new char[9, 12];
         }
 
         public void DrawMap()
         {
+            _map = new char[9, 12];
+
             for (int i = 0; i < _game.Warehouses.Length; i++)
             {
                 DrawWarehouseMap(_game.Warehouses[i], 0, i * 2 + 2);
@@ -52,6 +52,7 @@ namespace Goudkoorts.Controller
         {
             int y = warehouseY;
             int x = warehouseX + 1;
+
             _map[warehouseY, warehouseX] = warehouse.Description;
 
             Track currentTrack = warehouse.StartTrack;
@@ -62,19 +63,15 @@ namespace Goudkoorts.Controller
 
             while (currentTrack != null)
             {
+                _map[y, x] = currentTrack.Description;
+
                 switch (currentTrack.TrackBend)
                 {
-                    case TrackBend.Horizontal:
-                        _map[y, x] = currentTrack.Description;
-                        break;
                     case TrackBend.Vertical:
-                        _map[y, x] = currentTrack.Description;
                         keepCurrentX = true;
                         y--;
                         break;
                     case TrackBend.LeftUp:
-                        _map[y, x] = currentTrack.Description;
-
                         if (currentTrack.NextTrack.TrackBend == TrackBend.Horizontal)
                         {
                             reverse = true;
@@ -86,7 +83,6 @@ namespace Goudkoorts.Controller
                         }
                         break;
                     case TrackBend.LeftDown:
-                        _map[y, x] = currentTrack.Description;
                         if (currentTrack.NextTrack.TrackBend == TrackBend.Horizontal)
                         {
                             reverse = true;
@@ -97,41 +93,31 @@ namespace Goudkoorts.Controller
                             y++;
                         }
                         break;
-                    case TrackBend.RightUp:
-                        _map[y, x] = currentTrack.Description;
-                        break;
-                    case TrackBend.RightDown:
-                        _map[y, x] = currentTrack.Description;
-                        break;
-
-                    case TrackBend.SwitchUp:
-                        if (_map[y, x] != default(char))
+                    case TrackBend.Switch:
+                        if (_map[y + 1, x] == default(char) && _map[y - 1, x] != default(char))
                         {
                             currentTrack = ((SwitchSplit)currentTrack).TrackDown;
-                            trackSet = true;
-                            keepCurrentX = true;
                             y++;
                         }
                         else
                         {
-                            _map[y, x] = currentTrack.Description;
-                            if (currentTrack.NextTrack.TrackBend == TrackBend.Horizontal)
-                                reverse = true;
-                            else
-                                keepCurrentX = true;
-
+                            currentTrack = ((SwitchSplit)currentTrack).TrackUp;
                             y--;
                         }
+
+                        trackSet = true;
+                        keepCurrentX = true;
                         break;
                 }
+
                 if (!keepCurrentX)
                 {
                     if (reverse)
                         x--;
                     else
                         x++;
-
                 }
+
                 if (!trackSet)
                     currentTrack = currentTrack.NextTrack;
 

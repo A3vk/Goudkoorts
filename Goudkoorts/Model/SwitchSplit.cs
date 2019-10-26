@@ -13,19 +13,18 @@ namespace Goudkoorts.Model
 
         public SwitchSplit()
         {
-            TrackBend = TrackBend.SwitchUp;
+            TrackBend = TrackBend.Switch;
         }
 
         public override void SetDescription()
         {
-            switch(TrackBend)
+            if(TrackUp == NextTrack)
             {
-                case TrackBend.SwitchUp:
-                    Description = '╝';
-                    break;
-                case TrackBend.SwitchDown:
-                    Description = '╗';
-                    break;
+                Description = '╝';
+            }
+            else if(TrackDown == NextTrack)
+            {
+                Description = '╗';
             }
         }
     }
