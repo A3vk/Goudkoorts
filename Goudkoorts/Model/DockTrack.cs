@@ -10,9 +10,36 @@ namespace Goudkoorts.Model
     {
         public Ship Ship { get; set; }
 
+        public override bool MoveMincart(Minecart minecart)
+        {
+            if (Minecart != null)
+            {
+                if (!Minecart.Move())
+                {
+                    return false;
+                }
+            }
+
+            Minecart = minecart;
+            minecart.Position.Minecart = null;
+            minecart.Position = this;
+            Deposit();
+            return true;
+        }
+
+        public void Deposit()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void SetDescription()
         {
             Description = 'k';
+
+            if (Minecart != null)
+            {
+                Description = Minecart.Loaded ? '0' : 'O';
+            }
         }
     }
 }

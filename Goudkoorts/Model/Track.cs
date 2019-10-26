@@ -9,7 +9,12 @@ namespace Goudkoorts.Model
     public abstract class Track
     {
         public Track NextTrack { get; set; }
-        public Minecart Minecart { get; set; }
+        private Minecart _minecart;
+        public Minecart Minecart
+        {
+            get { return _minecart;  }
+            set { _minecart = value; SetDescription(); }
+        }
         public char Description { get; set; }
 
         private TrackBend _trackBend;
@@ -25,5 +30,6 @@ namespace Goudkoorts.Model
         }
 
         public abstract void SetDescription();
+        public abstract bool MoveMincart(Minecart minecart);
     }
 }

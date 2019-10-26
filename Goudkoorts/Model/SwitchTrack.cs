@@ -15,11 +15,14 @@ namespace Goudkoorts.Model
             set { _switched = value; SetDescription(); }
         }
 
+        public Track TrackUp { get; set; }
+        public Track TrackDown { get; set; }
+
         public SwitchTrack()
         {
             Switched = false;
         }
 
-        public abstract override void SetDescription();
+        public abstract void Switch();
     }
 }

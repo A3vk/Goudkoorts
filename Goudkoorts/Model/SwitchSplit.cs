@@ -8,12 +8,26 @@ namespace Goudkoorts.Model
 {
     public class SwitchSplit : SwitchTrack
     {
-        public Track TrackUp { get; set; }
-        public Track TrackDown { get; set; }
-
         public SwitchSplit()
         {
             TrackBend = TrackBend.Switch;
+        }
+
+        public override bool MoveMincart(Minecart minecart)
+        {
+
+            if (Minecart != null)
+            {
+                if (!Minecart.Move())
+                {
+                    return false;
+                }
+            }
+
+            Minecart = minecart;
+            minecart.Position.Minecart = null;
+            minecart.Position = this;
+            return true;
         }
 
         public override void SetDescription()
@@ -22,6 +36,17 @@ namespace Goudkoorts.Model
                 Description = '╗';
             else
                 Description = '╝';
+
+            if (Minecart != null)
+            {
+                Description = Minecart.Loaded ? '0' : 'O';
+            }
+        }
+
+        public override void Switch()
+        {
+            Switched = !Switched;
+            NextTrack = Switched ? TrackDown : TrackUp;
         }
     }
 }

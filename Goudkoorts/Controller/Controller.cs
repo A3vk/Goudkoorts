@@ -15,7 +15,9 @@ namespace Goudkoorts.Controller
         private OutputView _outputView;
         private Game _game;
         private int _interval;
+        private Timer _timer;
         private DateTime _time;
+        private bool _running;
 
         public Controller()
         {
@@ -24,14 +26,15 @@ namespace Goudkoorts.Controller
 
             _game = new Game();
             _game.InitMap();
+            _running = true;
 
-            _interval = 5;
-            Timer timer = new Timer(1000);
-            timer.Elapsed += OnTimedEvent;
-            timer.AutoReset = true;
-            timer.Enabled = true;
+            _interval = 1;
+            _timer = new Timer(1000);
+            _timer.Elapsed += OnTimedEvent;
+            _timer.AutoReset = true;
+            _timer.Enabled = true;
             
-            while(true)
+            while(_running)
             {
                 HandleKey(_inputView.WaitForInput().Key);
             }
@@ -39,12 +42,22 @@ namespace Goudkoorts.Controller
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            DrawMap();
             _time = _time.AddSeconds(1);
-            if(_time.Second == _interval)
+            if(_time.Second % _interval == 0)
             {
-                _game.MoveCarts();
+                if (!_game.MoveCarts())
+                    GameOver();
             }
+
+            DrawMap();
+        }
+
+        public void GameOver()
+        {
+            _running = false;
+            _timer.Stop();
+            _outputView.DisplayVictory();
+            Console.ReadLine();
         }
 
         public void HandleKey(ConsoleKey key)

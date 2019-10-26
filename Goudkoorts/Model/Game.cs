@@ -16,21 +16,48 @@ namespace Goudkoorts.Model
         {
             Warehouses = new Warehouse[3];
             SwitchTracks = new SwitchTrack[5];
+            Minecarts = new List<Minecart>();
 
             InitMap();
         }
 
-        public void MoveCarts()
+        public bool MoveCarts()
         {
             foreach (var minecart in Minecarts)
             {
-                minecart.Move();
+                if (!minecart.Move())
+                    return false;
             }
+
+            foreach (var minecart in Minecarts)
+            {
+                if(minecart.Position == null)
+                {
+                    Minecarts.Remove(minecart);
+                    break;
+                }
+            }
+
+            foreach (var minecart in Minecarts)
+            {
+                minecart.HasMoved = false;
+            }
+
+            return true;
+        }
+
+        public void SpawnMinecart(int index)
+        {
+            var cart = new Minecart();
+            Warehouses[index].StartTrack.Minecart = cart;
+            cart.Position = Warehouses[index].StartTrack;
+            Minecarts.Add(cart);
         }
 
         public void Switch(int index)
         {
-            SwitchTracks[index].Switched = !SwitchTracks[index].Switched;
+            if (SwitchTracks[index].Minecart == null)
+                SwitchTracks[index].Switch();
         }
 
         #region Initialize the Map
@@ -65,6 +92,8 @@ namespace Goudkoorts.Model
                 else if (new int[] { 2, 4, 10 }.Contains(a))
                 {
                     currentTrack.NextTrack = SwitchTracks[(a - 2) / 2];
+                    if (a != 4)
+                        SwitchTracks[(a - 2) / 2].TrackUp = currentTrack;
                 }
                 else if (a == 5)
                 {
@@ -95,48 +124,56 @@ namespace Goudkoorts.Model
         public void ConnectWarehouseB()
         {
             Track currentTrack = new NormalTrack();
+            Track previousTrack = new NormalTrack();
             Warehouses[1].StartTrack = (NormalTrack)currentTrack;
 
-            for (int a = 0; a <= 12; a++)
+            for (int b = 0; b <= 13; b++)
             {
-                if (a == 3)
+                if (b == 3)
                 {
+                    SwitchTracks[0].TrackDown = previousTrack;
                     currentTrack = SwitchTracks[0].NextTrack;
                     continue;
                 }
-                else if (a == 8)
+                else if (b == 8)
                 {
+                    SwitchTracks[2].TrackUp = previousTrack;
                     currentTrack = SwitchTracks[2].NextTrack;
                     continue;
                 }
-                else if (new int[] { 1, 11 }.Contains(a))
+                else if (new int[] { 1, 11 }.Contains(b))
                 {
                     currentTrack.NextTrack = new NormalTrack() { TrackBend = TrackBend.LeftUp };
                 }
-                else if (new int[] { 2, 4, 7, 9, 12 }.Contains(a))
+                else if (new int[] { 2, 4, 7, 9, 12 }.Contains(b))
                 {
-                    currentTrack.NextTrack = SwitchTracks[a / 3];
+                    currentTrack.NextTrack = SwitchTracks[b / 3];
                 }
-                else if (a == 5)
+                else if (b == 5)
                 {
-                    ((SwitchSplit) currentTrack).TrackDown = new NormalTrack() { TrackBend = TrackBend.RightUp };
+                    ((SwitchSplit)currentTrack).TrackDown = new NormalTrack() { TrackBend = TrackBend.RightUp };
                     currentTrack = ((SwitchSplit)currentTrack).TrackDown;
                     continue;
                 }
-                else if (a == 6)
+                else if (b == 6)
                 {
                     currentTrack.NextTrack = new NormalTrack() { TrackBend = TrackBend.LeftDown };
                 }
-                else if (a == 10)
+                else if (b == 10)
                 {
                     currentTrack.NextTrack = new NormalTrack() { TrackBend = TrackBend.RightDown };
                     ((SwitchSplit)currentTrack).TrackUp = currentTrack.NextTrack;
+                }
+                else if (b == 13)
+                {
+                    SwitchTracks[4].TrackDown = previousTrack;
                 }
                 else
                 {
                     currentTrack.NextTrack = new NormalTrack();
                 }
 
+                previousTrack = currentTrack;
                 currentTrack = currentTrack.NextTrack;
             }
         }
@@ -146,28 +183,31 @@ namespace Goudkoorts.Model
             Track currentTrack = new NormalTrack();
             Warehouses[2].StartTrack = (NormalTrack)currentTrack;
 
-            for (int a = 0; a <= 22; a++)
+            for (int c = 0; c <= 22; c++)
             {
-                if (new int[] { 4, 12 }.Contains(a))
+                if (new int[] { 4, 12 }.Contains(c))
                 {
                     currentTrack.NextTrack = new NormalTrack() { TrackBend = TrackBend.LeftUp };
                 }
-                else if ( new int[] { 5,7 }.Contains(a))
+                else if (new int[] { 5, 7 }.Contains(c))
                 {
-                    currentTrack.NextTrack = SwitchTracks[a / 2];
+                    currentTrack.NextTrack = SwitchTracks[c / 2];
+
+                    if (c == 5)
+                        SwitchTracks[c / 2].TrackDown = currentTrack;
                 }
-                else if (a == 8)
+                else if (c == 8)
                 {
                     ((SwitchSplit)currentTrack).TrackDown = new NormalTrack() { TrackBend = TrackBend.RightUp };
                     currentTrack = ((SwitchSplit)currentTrack).TrackDown;
                     continue;
 
                 }
-                else if (a == 11)
+                else if (c == 11)
                 {
                     currentTrack.NextTrack = new NormalTrack() { TrackBend = TrackBend.LeftDown };
                 }
-                else if (a >= 15 && a <= 22)
+                else if (c >= 15 && c <= 22)
                 {
                     currentTrack.NextTrack = new MarshallingTrack();
                 }
