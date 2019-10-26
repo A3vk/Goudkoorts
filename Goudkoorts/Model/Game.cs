@@ -10,7 +10,12 @@ namespace Goudkoorts.Model
     {
         public Warehouse[] Warehouses { get; private set; }
         public SwitchTrack[] SwitchTracks { get; private set; }
+        public DockTrack Dock { get; set; }
         public List<Minecart> Minecarts { get; set; }
+        public int Points
+        {
+            get { return Dock.Points; }
+        }
 
         public Game()
         {
@@ -110,7 +115,8 @@ namespace Goudkoorts.Model
                 }
                 else if (a == 17)
                 {
-                    currentTrack.NextTrack = new DockTrack();
+                    Dock = new DockTrack();
+                    currentTrack.NextTrack = Dock;
                 }
                 else
                 {

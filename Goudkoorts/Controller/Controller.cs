@@ -101,8 +101,9 @@ namespace Goudkoorts.Controller
                     lines[y] = lines[y] + map[y, x];
                 }
             }
-
-            _outputView.DisplayMap(lines);
+            string timeString = _time.ToString("m:ss");
+            string pointsString = _game.Points.ToString("0000");
+            _outputView.DisplayMap(lines, timeString, pointsString);
         }
 
         private char[,] DrawWarehouseMap(char[,] map, Warehouse warehouse, int warehouseX, int warehouseY)

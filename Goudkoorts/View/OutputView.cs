@@ -8,12 +8,11 @@ namespace Goudkoorts.View
 {
     public class OutputView
     {
-        public void DisplayMap(string[] lines)
+        public void DisplayMap(string[] lines, string time, string points)
         {
-
-       
-            Console.WriteLine($"┌─────────────┐                 ┌────────────────┐                ┌────────────────┐\n" +
-                               "│  Goudkoorts │                 │  Tijd:         │                │  Scoren:       │\n" +
+            Console.Clear();
+            Console.WriteLine( "┌─────────────┐                 ┌────────────────┐                ┌────────────────┐\n" +
+                              $"│  Goudkoorts │                 │  Tijd: {time}    │                │  Scoren: {points}  │\n" +
                                "└─────────────┘                 └────────────────┘                └────────────────┘\n" +
                                "─────────────────────────────────────────────────────────────────────────────────────────");
 
@@ -42,7 +41,7 @@ namespace Goudkoorts.View
                               "│╚/╔/|╗/╝: Wissel              │   mijnkarren naar    │\n" +
                               "│      0 : Vol karretje        │   de Kade            │\n" +
                               "│      O : Leeg karretje       │                      │\n" +
-                              "│      ⌂ : Warehouse           │                      │\n" +
+                              "│  A/B/C : Warehouse           │                      │\n" +
                               "│      k : Kade                │                      │\n" +
                               "│      ÷ : Rangeerterein       │                      │\n" +
                               "│                              │                      │\n" +
