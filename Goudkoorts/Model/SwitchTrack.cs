@@ -8,7 +8,12 @@ namespace Goudkoorts.Model
 {
     public abstract class SwitchTrack : Track
     {
-        public bool Switched { get; set; }
+        private bool _switched;
+        public bool Switched
+        {
+            get { return _switched; }
+            set { _switched = value; SetDescription(); }
+        }
 
         public SwitchTrack()
         {

@@ -12,8 +12,6 @@ namespace Goudkoorts.Controller
         static void Main(string[] args)
         {
             _controller = new Controller();
-            _controller.DrawMap();
-            Console.ReadLine();
         }
     }
 }

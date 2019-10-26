@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Goudkoorts.Controller.Program">
-    <Position X="3.25" Y="3.25" Width="1.5" />
+    <Position X="6.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAA=</HashCode>
       <FileName>Controller\Program.cs</FileName>
@@ -11,51 +11,42 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Goudkoorts.Controller.Controller">
-    <Position X="6" Y="3.25" Width="1.5" />
-    <AssociationLine Name="InputView" Type="Goudkoorts.View.InputView" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="6.594" Y="3.25" />
-        <Point X="6.594" Y="2.531" />
-        <Point X="5.438" Y="2.531" />
-        <Point X="5.438" Y="1.562" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="OutputView" Type="Goudkoorts.View.OutputView" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="6.938" Y="3.25" />
-        <Point X="6.938" Y="2.529" />
-        <Point X="8.281" Y="2.529" />
-        <Point X="8.281" Y="1.562" />
-      </Path>
-    </AssociationLine>
+    <Position X="9.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAEAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAMAAACABAAQ=</HashCode>
       <FileName>Controller\Controller.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="InputView" />
-      <Property Name="OutputView" />
-      <Property Name="Game" />
+      <Field Name="_outputView" />
+      <Field Name="_game" />
+      <Field Name="_inputView" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Goudkoorts.View.InputView" Collapsed="true">
-    <Position X="4.75" Y="1" Width="1.5" />
+    <Position X="8.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\InputView.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Goudkoorts.View.OutputView" Collapsed="true">
-    <Position X="7.5" Y="1" Width="1.5" />
+    <Position X="10.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAgQAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>View\OutputView.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Goudkoorts.Model.Warehouse">
-    <Position X="6" Y="10" Width="1.5" />
+    <Position X="9.25" Y="11.75" Width="1.5" />
+    <AssociationLine Name="StartTrack" Type="Goudkoorts.Model.NormalTrack" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.75" Y="12.302" />
+        <Point X="14.812" Y="12.302" />
+        <Point X="14.812" Y="11.233" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Warehouse.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -63,9 +54,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Goudkoorts.Model.DockTrack">
-    <Position X="11.25" Y="10" Width="1.5" />
+    <Position X="17.5" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\DockTrack.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -73,19 +64,26 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Goudkoorts.Model.Game">
-    <Position X="6" Y="7.5" Width="1.5" />
+    <Position X="9.25" Y="8.75" Width="1.5" />
+    <AssociationLine Name="SwitchTracks" Type="Goudkoorts.Model.SwitchTrack" FixedToPoint="true">
+      <Path>
+        <Point X="10.75" Y="10.25" />
+        <Point X="12.25" Y="10.25" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <HashCode>AAACAAAAACAAAAAAAAAAAAAEAABAAAAAAAAACAAQAAA=</HashCode>
       <FileName>Model\Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Warehouses" />
+      <Property Name="SwitchTracks" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Goudkoorts.Model.MarshallingTrack">
     <Position X="15.75" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\MarshallingTrack.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -100,20 +98,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Goudkoorts.Model.NormalTrack">
-    <Position X="9" Y="10" Width="1.5" />
+    <Position X="14" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\NormalTrack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Goudkoorts.Model.Ship">
-    <Position X="11.25" Y="11.75" Width="1.5" />
-    <AssociationLine Name="DockTrack" Type="Goudkoorts.Model.DockTrack" FixedFromPoint="true">
-      <Path>
-        <Point X="11.625" Y="11.75" />
-        <Point X="11.625" Y="10.997" />
-      </Path>
-    </AssociationLine>
+    <Position X="17.5" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Model\Ship.cs</FileName>
@@ -123,16 +115,24 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Goudkoorts.Model.SwitchTrack">
-    <Position X="13.5" Y="10" Width="1.5" />
+    <Position X="12.25" Y="9.75" Width="1.5" />
+    <InheritanceLine Type="Goudkoorts.Model.Track" FixedToPoint="true">
+      <Path>
+        <Point X="14.25" Y="8.776" />
+        <Point X="14.25" Y="9.625" />
+        <Point X="13.438" Y="9.625" />
+        <Point X="13.438" Y="9.75" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>Model\SwitchTrack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Goudkoorts.Model.Track">
-    <Position X="11.25" Y="8" Width="1.5" />
+    <Position X="13.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAEAAIACAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>Model\Track.cs</FileName>
     </TypeIdentifier>
   </Class>

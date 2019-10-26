@@ -9,5 +9,10 @@ namespace Goudkoorts.Model
     public class Minecart
     {
         public Track Position { get; set; }
+
+        public void Move()
+        {
+
+        }
     }
 }

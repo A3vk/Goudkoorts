@@ -18,14 +18,10 @@ namespace Goudkoorts.Model
 
         public override void SetDescription()
         {
-            if(TrackUp == NextTrack)
-            {
-                Description = '╝';
-            }
-            else if(TrackDown == NextTrack)
-            {
+            if(Switched)
                 Description = '╗';
-            }
+            else
+                Description = '╝';
         }
     }
 }
