@@ -8,15 +8,20 @@ namespace Goudkoorts.View
 {
     public class OutputView
     {
-        public void DisplayMaze(String track)
+        public void DisplayMap(string[] lines)
         {
+
             Console.Clear();
             Console.WriteLine("┌─────────────┐\n" +
                               "│  Goudkoorts │\n" +
                               "└─────────────┘\n" +
                               "─────────────────────────────────────────────────────────────────────────────────────────");
 
-            Console.WriteLine(track);
+
+            foreach (var item in lines)
+            {
+                Console.WriteLine(item);
+            }
 
             Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────\n" +
                               "> Gebruik de q,w,e,r,t toetsen voor het veranderen van de wissel ( s = stop, r = reset )");
