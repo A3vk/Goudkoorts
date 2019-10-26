@@ -10,6 +10,7 @@ namespace Goudkoorts.Model
     {
         public Warehouse[] Warehouses { get; private set; }
         public SwitchTrack[] SwitchTracks { get; private set; }
+        public List<Minecart> Minecarts { get; set; }
 
         public Game()
         {
@@ -17,6 +18,19 @@ namespace Goudkoorts.Model
             SwitchTracks = new SwitchTrack[5];
 
             InitMap();
+        }
+
+        public void MoveCarts()
+        {
+            foreach (var minecart in Minecarts)
+            {
+                minecart.Move();
+            }
+        }
+
+        public void Switch(int index)
+        {
+            SwitchTracks[index].Switched = !SwitchTracks[index].Switched;
         }
 
         #region Initialize the Map

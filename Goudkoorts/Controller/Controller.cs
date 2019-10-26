@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Goudkoorts.Controller
 {
@@ -13,8 +14,8 @@ namespace Goudkoorts.Controller
         private InputView _inputView;
         private OutputView _outputView;
         private Game _game;
-
-        private char[,] _map { get; set; }
+        private int _interval;
+        private DateTime _time;
 
         public Controller()
         {
@@ -22,17 +23,60 @@ namespace Goudkoorts.Controller
             _outputView = new OutputView();
 
             _game = new Game();
-
             _game.InitMap();
+
+            _interval = 5;
+            Timer timer = new Timer(1000);
+            timer.Elapsed += OnTimedEvent;
+            timer.AutoReset = true;
+            timer.Enabled = true;
+            
+            while(true)
+            {
+                HandleKey(_inputView.WaitForInput().Key);
+            }
         }
 
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            DrawMap();
+            _time = _time.AddSeconds(1);
+            if(_time.Second == _interval)
+            {
+                _game.MoveCarts();
+            }
+        }
+
+        public void HandleKey(ConsoleKey key)
+        {
+            switch(key) 
+            {
+                case ConsoleKey.Q:
+                    _game.Switch(0);
+                    break;
+                case ConsoleKey.W:
+                    _game.Switch(1);
+                    break;
+                case ConsoleKey.E:
+                    _game.Switch(2);
+                    break;
+                case ConsoleKey.R:
+                    _game.Switch(3);
+                    break;
+                case ConsoleKey.T:
+                    _game.Switch(4);
+                    break;
+            }
+        }
+
+        #region Display Map
         public void DrawMap()
         {
-            _map = new char[9, 12];
+            var map = new char[9, 12];
 
             for (int i = 0; i < _game.Warehouses.Length; i++)
             {
-                DrawWarehouseMap(_game.Warehouses[i], 0, i * 2 + 2);
+                map = DrawWarehouseMap(map, _game.Warehouses[i], 0, i * 2 + 2);
             }
 
             string[] lines = new string[9];
@@ -41,19 +85,19 @@ namespace Goudkoorts.Controller
             {
                 for (int x = 0; x < 12; x++)
                 {
-                    lines[y] = lines[y] + _map[y, x];
+                    lines[y] = lines[y] + map[y, x];
                 }
             }
 
             _outputView.DisplayMap(lines);
         }
 
-        private void DrawWarehouseMap(Warehouse warehouse, int warehouseX, int warehouseY)
+        private char[,] DrawWarehouseMap(char[,] map, Warehouse warehouse, int warehouseX, int warehouseY)
         {
             int y = warehouseY;
             int x = warehouseX + 1;
 
-            _map[warehouseY, warehouseX] = warehouse.Description;
+            map[warehouseY, warehouseX] = warehouse.Description;
 
             Track currentTrack = warehouse.StartTrack;
 
@@ -63,7 +107,7 @@ namespace Goudkoorts.Controller
 
             while (currentTrack != null)
             {
-                _map[y, x] = currentTrack.Description;
+                map[y, x] = currentTrack.Description;
 
                 switch (currentTrack.TrackBend)
                 {
@@ -94,7 +138,7 @@ namespace Goudkoorts.Controller
                         }
                         break;
                     case TrackBend.Switch:
-                        if (_map[y + 1, x] == default(char) && _map[y - 1, x] != default(char))
+                        if (map[y + 1, x] == default(char) && map[y - 1, x] != default(char))
                         {
                             currentTrack = ((SwitchSplit)currentTrack).TrackDown;
                             y++;
@@ -124,6 +168,9 @@ namespace Goudkoorts.Controller
                 keepCurrentX = false;
                 trackSet = false;
             }
+
+            return map;
         }
+        #endregion
     }
 }

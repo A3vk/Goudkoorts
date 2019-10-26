@@ -10,20 +10,15 @@ namespace Goudkoorts.Model
     {
         public SwitchMerge()
         {
-            TrackBend = TrackBend.RightUp;
+            TrackBend = TrackBend.Merge;
         }
 
         public override void SetDescription()
         {
-            switch(TrackBend)
-            {
-                case TrackBend.RightUp:
-                    Description = '╚';
-                    break;
-                case TrackBend.RightDown:
-                    Description = '╔';
-                    break;
-            }
+            if (Switched)
+                Description = '╔';
+            else
+                Description = '╚';
         }
     }
 }
