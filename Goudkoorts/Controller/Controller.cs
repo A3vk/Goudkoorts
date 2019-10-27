@@ -28,7 +28,7 @@ namespace Goudkoorts.Controller
             _game.InitMap();
             _running = true;
 
-            _interval = 5;
+            _interval = 1;
             _timer = new Timer(1000);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = true;
@@ -47,7 +47,7 @@ namespace Goudkoorts.Controller
                 if (!_game.MoveCarts())
                     GameOver();
 
-                _game.SpawnMinecart();
+                _game.SpawnMinecart(0);
                 _game.Dock.TryDock();
                 _time = _interval;
             }
@@ -58,7 +58,7 @@ namespace Goudkoorts.Controller
         {
             _running = false;
             _timer.Stop();
-            _outputView.DisplayVictory();
+            _outputView.DisplayVictory(_game.Points.ToString("0000"));
             Console.ReadLine();
         }
 
@@ -105,7 +105,27 @@ namespace Goudkoorts.Controller
             }
             string timeString = _time.ToString();
             string pointsString = _game.Points.ToString("0000");
-            _outputView.DisplayMap(lines, timeString, pointsString);
+            var ship = "<________>";
+
+            if (_game.Dock.IsDocked)
+            {
+                var load = _game.Dock.Ship.Load;
+
+                ship = ship.Remove(1, load);
+
+                for (int i = 0; i < load; i++)
+                {
+                    ship = ship.Insert(1, "0");
+                }
+
+            }
+            else
+            {
+                ship = "";
+            }
+           
+
+            _outputView.DisplayMap(lines, timeString, pointsString, ship);
         }
 
         private char[,] DrawWarehouseMap(char[,] map, Warehouse warehouse, int warehouseX, int warehouseY)

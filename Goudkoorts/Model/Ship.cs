@@ -17,6 +17,7 @@ namespace Goudkoorts.Model
             _dock = dock;
             _maxLoad = 8;
             Load = _maxLoad;
+            Load = 0;
         }
 
         public void LoadShip()
