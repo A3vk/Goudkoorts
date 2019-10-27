@@ -9,7 +9,12 @@ namespace Goudkoorts.Model
     public class DockTrack : Track
     {
         public Ship Ship { get; set; }
+        public int Points { get; set; }
 
+        public DockTrack()
+        {
+            Points = 0;
+        }
         public override bool MoveMincart(Minecart minecart)
         {
             if (Minecart != null)
