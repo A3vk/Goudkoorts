@@ -9,10 +9,13 @@ namespace Goudkoorts.Model
     public class DockTrack : Track
     {
         public Ship Ship { get; set; }
+        public bool IsDocked { get; set; }
         public int Points { get; set; }
 
         public DockTrack()
         {
+            Ship = new Ship(this);
+            IsDocked = true;
             Points = 0;
         }
         public override bool MoveMincart(Minecart minecart)
@@ -29,13 +32,37 @@ namespace Goudkoorts.Model
             minecart.Position.Minecart = null;
             minecart.Position = this;
             minecart.IsStopped = false;
-            Deposit();
+            Deposit(minecart);
             return true;
         }
 
-        public void Deposit()
+        public void Deposit(Minecart minecart)
         {
-            //throw new NotImplementedException();
+            if (IsDocked)
+            {
+                Ship.LoadShip();
+                Points++;
+                minecart.Loaded = false;
+            }
+        }
+
+        public void TryDock()
+        {
+            Random random = new Random();
+
+            if(!IsDocked)
+            {
+                if(random.NextDouble() < 0.25)
+                {
+                    IsDocked = true;
+                }
+            }
+        }
+
+        public void Sail()
+        {
+            Points += 10;
+            IsDocked = false;
         }
 
         public override void SetDescription()

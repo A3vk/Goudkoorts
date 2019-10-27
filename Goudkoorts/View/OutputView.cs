@@ -12,7 +12,7 @@ namespace Goudkoorts.View
         {
             Console.Clear();
             Console.WriteLine( "┌─────────────┐                 ┌────────────────┐                ┌────────────────┐\n" +
-                              $"│  Goudkoorts │                 │  Tijd: {time}    │                │  Scoren: {points}  │\n" +
+                              $"│  Goudkoorts │                 │  Tijd: {time}       │                │  Scoren: {points}  │\n" +
                                "└─────────────┘                 └────────────────┘                └────────────────┘\n" +
                                "─────────────────────────────────────────────────────────────────────────────────────────");
 
