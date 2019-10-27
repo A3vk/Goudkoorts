@@ -49,7 +49,7 @@ namespace Goudkoorts.Model
                     break;
             }
 
-            if(Minecart != null)
+            if (Minecart != null)
             {
                 Description = Minecart.Loaded ? '0' : 'O';
             }

@@ -33,7 +33,7 @@ namespace Goudkoorts.Model
 
         public override void SetDescription()
         {
-            if(Switched)
+            if (Switched)
                 Description = '╗';
             else
                 Description = '╝';

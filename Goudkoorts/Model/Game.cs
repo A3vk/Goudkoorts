@@ -38,7 +38,7 @@ namespace Goudkoorts.Model
 
             foreach (var minecart in Minecarts)
             {
-                if(minecart.Position == null)
+                if (minecart.Position == null)
                 {
                     Minecarts.Remove(minecart);
                     break;
@@ -58,7 +58,7 @@ namespace Goudkoorts.Model
             Random random = new Random();
 
             var chance = random.NextDouble();
-            if(chance < Percentage / 100)
+            if (chance < Percentage / 100)
             {
                 var warehouse = random.Next(3);
 
@@ -69,7 +69,7 @@ namespace Goudkoorts.Model
             }
         }
 
-        //TEMP
+        //DIT IS EEN TEST FUNCTIE, DEZE IS BEDOELD OM MINECARTS GEFORCEERD TE LATEN SPAWNEN
         public void SpawnMinecart(int index)
         {
             var cart = new Minecart();

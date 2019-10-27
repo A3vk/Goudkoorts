@@ -12,7 +12,7 @@ namespace Goudkoorts.Model
         private Minecart _minecart;
         public Minecart Minecart
         {
-            get { return _minecart;  }
+            get { return _minecart; }
             set { _minecart = value; SetDescription(); }
         }
         public char Description { get; set; }

@@ -28,13 +28,13 @@ namespace Goudkoorts.Controller
             _game.InitMap();
             _running = true;
 
-            _interval = 1;
+            _interval = 5;
             _timer = new Timer(1000);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = true;
             _timer.Enabled = true;
-            
-            while(_running)
+
+            while (_running)
             {
                 HandleKey(_inputView.WaitForInput().Key);
             }
@@ -42,14 +42,22 @@ namespace Goudkoorts.Controller
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            if(_time-- == 0)
+            if (_time-- == 0)
             {
                 if (!_game.MoveCarts())
                     GameOver();
 
-                _game.SpawnMinecart(0);
+                _game.SpawnMinecart();
                 _game.Dock.TryDock();
                 _time = _interval;
+
+                if (_game.Points != 0 && _game.Points % 18 == 0)
+                {
+                    if (_interval != 1)
+                        _interval--;
+
+                    _game.Percentage += 5;
+                }
             }
             DrawMap();
         }
@@ -64,22 +72,31 @@ namespace Goudkoorts.Controller
 
         public void HandleKey(ConsoleKey key)
         {
-            switch(key) 
+            switch (key)
             {
                 case ConsoleKey.Q:
-                    _game.Switch(0);
+                    if (_time != 0)
+                        _game.Switch(0);
                     break;
                 case ConsoleKey.W:
-                    _game.Switch(1);
+                    if (_time != 0)
+                        _game.Switch(1);
                     break;
                 case ConsoleKey.E:
-                    _game.Switch(2);
+                    if (_time != 0)
+                        _game.Switch(2);
                     break;
                 case ConsoleKey.R:
-                    _game.Switch(3);
+                    if (_time != 0)
+                        _game.Switch(3);
                     break;
                 case ConsoleKey.T:
-                    _game.Switch(4);
+                    if (_time != 0)
+                        _game.Switch(4);
+                    break;
+                case ConsoleKey.S:
+                    _running = false;
+                    _timer.Stop();
                     break;
             }
         }
@@ -123,7 +140,7 @@ namespace Goudkoorts.Controller
             {
                 ship = "";
             }
-           
+
 
             _outputView.DisplayMap(lines, timeString, pointsString, ship);
         }

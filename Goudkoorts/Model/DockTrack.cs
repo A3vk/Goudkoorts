@@ -51,9 +51,9 @@ namespace Goudkoorts.Model
         {
             Random random = new Random();
 
-            if(!IsDocked)
+            if (!IsDocked)
             {
-                if(random.NextDouble() < 0.25)
+                if (random.NextDouble() < 0.25)
                 {
                     IsDocked = true;
                 }
