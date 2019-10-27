@@ -8,13 +8,14 @@ namespace Goudkoorts.View
 {
     public class OutputView
     {
-        public void DisplayMap(string[] lines, string time, string points)
+        public void DisplayMap(string[] lines, string time, string points, string ship)
         {
             Console.Clear();
             Console.WriteLine( "┌─────────────┐                 ┌────────────────┐                ┌────────────────┐\n" +
                               $"│  Goudkoorts │                 │  Tijd: {time}    │                │  Scoren: {points}  │\n" +
                                "└─────────────┘                 └────────────────┘                └────────────────┘\n" +
                                "─────────────────────────────────────────────────────────────────────────────────────────");
+            Console.WriteLine(ship);
 
 
 

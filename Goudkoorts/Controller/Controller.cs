@@ -103,7 +103,19 @@ namespace Goudkoorts.Controller
             }
             string timeString = _time.ToString("m:ss");
             string pointsString = _game.Points.ToString("0000");
-            _outputView.DisplayMap(lines, timeString, pointsString);
+
+            var load = 4;
+
+            var ship = "<________>";
+
+            ship = ship.Remove(1, load);
+
+            for (int i = 0; i < load; i++)
+            {
+                ship = ship.Insert(1, "0");
+            }
+
+            _outputView.DisplayMap(lines, timeString, pointsString, ship);
         }
 
         private char[,] DrawWarehouseMap(char[,] map, Warehouse warehouse, int warehouseX, int warehouseY)
