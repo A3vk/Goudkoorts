@@ -10,8 +10,7 @@ namespace Goudkoorts.View
     {
         public void DisplayMap(string[] lines)
         {
-
-       
+            Console.Clear();
             Console.WriteLine($"┌─────────────┐                 ┌────────────────┐                ┌────────────────┐\n" +
                                "│  Goudkoorts │                 │  Tijd:         │                │  Scoren:       │\n" +
                                "└─────────────┘                 └────────────────┘                └────────────────┘\n" +

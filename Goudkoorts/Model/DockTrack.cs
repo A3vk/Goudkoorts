@@ -23,13 +23,14 @@ namespace Goudkoorts.Model
             Minecart = minecart;
             minecart.Position.Minecart = null;
             minecart.Position = this;
+            minecart.IsStopped = false;
             Deposit();
             return true;
         }
 
         public void Deposit()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void SetDescription()

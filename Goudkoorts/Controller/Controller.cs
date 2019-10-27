@@ -47,6 +47,8 @@ namespace Goudkoorts.Controller
             {
                 if (!_game.MoveCarts())
                     GameOver();
+
+                _game.SpawnMinecart();
             }
 
             DrawMap();
