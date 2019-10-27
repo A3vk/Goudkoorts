@@ -8,6 +8,24 @@ namespace Goudkoorts.Model
 {
     public class Ship
     {
-        public DockTrack DockTrack { get; set; }
+        private DockTrack _dock;
+        private int _maxLoad;
+        public int Load { get; set; }
+
+        public Ship(DockTrack dock)
+        {
+            _dock = dock;
+            _maxLoad = 8;
+            Load = _maxLoad;
+        }
+
+        public void LoadShip()
+        {
+            if (++Load == _maxLoad)
+            {
+                _dock.Sail();
+                Load = 0;
+            }
+        }
     }
 }

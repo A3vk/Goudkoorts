@@ -16,7 +16,7 @@ namespace Goudkoorts.Controller
         private Game _game;
         private int _interval;
         private Timer _timer;
-        private DateTime _time;
+        private int _time;
         private bool _running;
 
         public Controller()
@@ -28,7 +28,7 @@ namespace Goudkoorts.Controller
             _game.InitMap();
             _running = true;
 
-            _interval = 1;
+            _interval = 5;
             _timer = new Timer(1000);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = true;
@@ -42,13 +42,15 @@ namespace Goudkoorts.Controller
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            _time = _time.AddSeconds(1);
-            if(_time.Second % _interval == 0)
+            if(_time-- == 0)
             {
                 if (!_game.MoveCarts())
                     GameOver();
-            }
 
+                _game.SpawnMinecart();
+                _game.Dock.TryDock();
+                _time = _interval;
+            }
             DrawMap();
         }
 
@@ -101,7 +103,7 @@ namespace Goudkoorts.Controller
                     lines[y] = lines[y] + map[y, x];
                 }
             }
-            string timeString = _time.ToString("m:ss");
+            string timeString = _time.ToString();
             string pointsString = _game.Points.ToString("0000");
 
             var load = 4;

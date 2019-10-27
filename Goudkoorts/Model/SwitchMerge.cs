@@ -43,6 +43,7 @@ namespace Goudkoorts.Model
             Minecart = minecart;
             minecart.Position.Minecart = null;
             minecart.Position = this;
+            minecart.IsStopped = false;
             return true;
         }
 

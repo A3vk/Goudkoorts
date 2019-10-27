@@ -12,6 +12,7 @@ namespace Goudkoorts.Model
         public SwitchTrack[] SwitchTracks { get; private set; }
         public DockTrack Dock { get; set; }
         public List<Minecart> Minecarts { get; set; }
+        public double Percentage { get; set; }
         public int Points
         {
             get { return Dock.Points; }
@@ -22,6 +23,7 @@ namespace Goudkoorts.Model
             Warehouses = new Warehouse[3];
             SwitchTracks = new SwitchTrack[5];
             Minecarts = new List<Minecart>();
+            Percentage = 10;
 
             InitMap();
         }
@@ -51,6 +53,23 @@ namespace Goudkoorts.Model
             return true;
         }
 
+        public void SpawnMinecart()
+        {
+            Random random = new Random();
+
+            var chance = random.NextDouble();
+            if(chance < Percentage / 100)
+            {
+                var warehouse = random.Next(3);
+
+                var cart = new Minecart();
+                Warehouses[warehouse].StartTrack.Minecart = cart;
+                cart.Position = Warehouses[warehouse].StartTrack;
+                Minecarts.Add(cart);
+            }
+        }
+
+        //TEMP
         public void SpawnMinecart(int index)
         {
             var cart = new Minecart();
