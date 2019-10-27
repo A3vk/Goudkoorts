@@ -43,6 +43,7 @@ namespace Goudkoorts.Model
                 Ship.LoadShip();
                 Points++;
                 minecart.Loaded = false;
+                SetDescription();
             }
         }
 
